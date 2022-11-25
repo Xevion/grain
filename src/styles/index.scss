@@ -32,6 +32,12 @@ body {
     background-blend-mode: overlay;
 }
 
-.focus-ring {
-    @apply ring-1 ring-zinc-50/50 focus:ring-offset-fuchsia-600;
+.button {
+    @apply border-zinc-50/70 border outline-none focus:outline-2 outline-offset-2 focus:outline-fuchsia-500;
+}
+
+.semibold-children {
+    & b {
+        font-weight: 600;
+    }
 }
