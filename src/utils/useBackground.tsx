@@ -1,7 +1,7 @@
 import { Chance } from "chance";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import ReactDOMServer from "react-dom/server";
-import { getEdgePoint } from "./utils";
+import { getEdgePoint } from "@/utils/helpers";
 
 interface useBackgroundProps {
   width: number;

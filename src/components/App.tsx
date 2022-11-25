@@ -1,7 +1,6 @@
-import { useEventListener, useInterval, useWindowSize } from "usehooks-ts";
-import useBackground from "@/useBackground";
-import Post from "@/Post";
-import { useToggle } from "usehooks-ts";
+import { useEventListener, useInterval, useWindowSize, useToggle } from "usehooks-ts";
+import useBackground from "@/utils/useBackground";
+import Post from "@/components/Post";
 
 import {
   ArrowPathIcon,
