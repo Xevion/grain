@@ -1,4 +1,5 @@
 import { SparklesIcon } from "@heroicons/react/20/solid";
+import { ShieldExclamationIcon } from "@heroicons/react/24/solid";
 
 const Post = () => {
   return (
@@ -17,7 +18,11 @@ const Post = () => {
             >
               Ryan Walters
             </a>
-            <a href="https://github.com/Xevion" target="_blank" className="hover:text-yellow-600 transition-colors cursor-pointer">
+            <a
+              href="https://github.com/Xevion"
+              target="_blank"
+              className="hover:text-yellow-600 transition-colors cursor-pointer"
+            >
               <SparklesIcon className="h-4 inline mb-2.5 m-2 " />
             </a>
           </span>
@@ -55,6 +60,14 @@ const Post = () => {
             the <pre className="inline">background</pre> CSS property, allowing
             dynamic SVG generation.
           </p>
+          <div className="pt-3">
+            <a href="https://github.com/Xevion/grain">
+              <div className="inline text-white text-medium drop-shadow-lg rounded border-2 shadow-xl border-zinc-600/75 m-2 p-2 bg-gradient-to-r from-red-500 via-orange-500 to-orange-700">
+                In Progress
+                <ShieldExclamationIcon className="inline h-[1.4rem] ml-3 drop-shadow-2xl" />
+              </div>
+            </a>
+          </div>
         </div>
       </div>
     </>
