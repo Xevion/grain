@@ -7,7 +7,7 @@ export default ({mode }) => {
   process.env = {...process.env, ...loadEnv(mode, process.cwd())};
 
   return defineConfig({
-    base: process.env.NODE_ENV == 'production' ? '/grain' : '',
+    base: process.env.NODE_ENV == 'production' ? '/grain/' : '/',
     plugins: [react(), tsconfigPaths()],
   })
 }
