@@ -1,69 +1,19 @@
-import Chance from "chance";
-import ReactDOMServer from "react-dom/server";
 import { useEventListener, useWindowSize } from "usehooks-ts";
-import { useState } from "react";
-import { getEdgePoint } from "@/utils";
-
-const chance = Chance();
-const colors = [
-  "#ed625d",
-  "#42b6c6",
-  "#f79f88",
-  "#446ba6",
-  "#4b95f0",
-  "#d16ba5",
-];
-
-const generateBackground = () => {
-  return chance.pickset(colors, 5).map((color) => {
-    const [x, y] = getEdgePoint(chance.integer({ min: 0, max: 100 }), 100, 100);
-    return `radial-gradient(farthest-corner at ${x}% ${y}%, ${chance.pickone(
-      colors
-    )}, ${chance.pickone(colors)}, transparent 100%)`;
-  });
-};
+import useBackground from "./useBackground";
 
 function App() {
   const { width, height } = useWindowSize();
-  const [background, setBackground] = useState(generateBackground());
+  const { svg, backgrounds, regenerate } = useBackground({ width, height, ratio: 0.3 });
 
   useEventListener("keydown", (e) => {
     if (e.code != "Enter") return;
-    e.preventDefault();
 
-    setBackground(generateBackground());
+    e.preventDefault();
+    regenerate();
   });
 
-  const ratio = 0.3;
-  const svgWidth = Math.ceil((width ?? 1920) * ratio);
-  const svgHeight = Math.ceil((height ?? 1080) * ratio);
-  console.log({ svgWidth, svgHeight });
-
-  const noise = (
-    <svg
-      viewBox={`0 0 ${svgWidth} ${svgHeight}`}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <filter id="noiseFilter">
-        <feTurbulence
-          type="fractalNoise"
-          baseFrequency="2"
-          numOctaves="2"
-          stitchTiles="stitch"
-        />
-      </filter>
-      <g opacity={0.9}>
-        <rect width="100%" height="100%" filter="url(#noiseFilter)" />
-      </g>
-    </svg>
-  );
-
-  const svg = `data:image/svg+xml;base64,${window.btoa(
-    ReactDOMServer.renderToString(noise)
-  )}`;
-
   const appStyle = {
-    background: [`url("${svg}")`, ...background].join(", "),
+    background: [`url("${svg}")`, ...backgrounds].join(", "),
   };
 
   return (
