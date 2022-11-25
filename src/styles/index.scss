@@ -41,3 +41,7 @@ body {
         font-weight: 600;
     }
 }
+
+pre.inline {
+    @apply text-zinc-900;
+}
