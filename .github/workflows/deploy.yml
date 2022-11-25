@@ -2,7 +2,7 @@ name: deploy
 on: [push]
 jobs:
   build:
-    name: Deploy 'grain'
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
