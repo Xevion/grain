@@ -1,4 +1,4 @@
-import { useEventListener, useInterval, useWindowSize, useToggle } from "usehooks-ts";
+import { useInterval, useWindowSize, useToggle } from "usehooks-ts";
 import useBackground from "@/utils/useBackground";
 import Post from "@/components/Post";
 
@@ -17,14 +17,7 @@ function App() {
   });
   const [postHidden, toggleHidden] = useToggle(false);
 
-  useEventListener("keydown", (e) => {
-    if (e.code != "Enter") return;
-
-    e.preventDefault();
-    regenerate();
-  });
-
-  const [iconSpinning, toggleIconSpinning, setIconSpinning] = useToggle(false);
+  const [iconSpinning, , setIconSpinning] = useToggle(false);
   useInterval(
     () => {
       setIconSpinning(false);
@@ -42,7 +35,7 @@ function App() {
         <div className="grid grid-cols-12 w-full">
           <div className="col-span-3 sm:col-span-2">
             <button
-              className="block p-2 w-10 h-10 rounded mx-auto xs:mx-0 xs:ml-5 mt-5 shadow-inner-md bg-zinc-700 text-zinc-100  focus-ring"
+              className="block p-2 w-10 h-10 rounded mx-auto xs:mx-0 xs:ml-5 mt-5 shadow-inner-md bg-zinc-700 text-zinc-100 button"
               onClick={() => {
                 setIconSpinning(true);
                 regenerate();
@@ -55,20 +48,20 @@ function App() {
               />
             </button>
             <button
-              className="block p-2 w-10 h-10 rounded mx-auto xs:mx-0 xs:ml-5 mt-5 shadow-inner-md bg-zinc-700 text-zinc-100  focus-ring"
+              className="block p-2 w-10 h-10 rounded mx-auto xs:mx-0 xs:ml-5 mt-5 shadow-inner-md bg-zinc-700 text-zinc-100 button"
               onClick={toggleHidden}
             >
               {postHidden ? <EyeIcon /> : <EyeSlashIcon />}
             </button>
           </div>
           <div
-            className={`flex col-span-9 sm:col-span-6 md:col-span-5 w-full min-h-[100vh]`}
+            className={`transition-opacity ease-in-out duration-75 ${
+              postHidden ? "opacity-0" : ""
+            } flex col-span-9 sm:col-span-6 md:col-span-5 w-full min-h-[100vh]`}
           >
-            {!postHidden ? (
-              <div className="bg-white shadow-lg">
-                <Post />
-              </div>
-            ) : null}
+            <div className="bg-white shadow-lg">
+              <Post />
+            </div>
           </div>
         </div>
       </div>
