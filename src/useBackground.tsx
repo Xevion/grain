@@ -47,27 +47,29 @@ const useBackground = ({
     setBackground(generateBackground());
   };
 
-  const svgWidth = Math.ceil((width ?? 1920) * ratio);
-  const svgHeight = Math.ceil((height ?? 1080) * ratio);
-  const noise = (
-    <svg
-      viewBox={`0 0 ${svgWidth} ${svgHeight}`}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <filter id="noiseFilter">
-        <feTurbulence
-          type="fractalNoise"
-          baseFrequency="2.1"
-          numOctaves="2"
-          seed={chance.natural()}
-          stitchTiles="stitch"
-        />
-      </filter>
-      <g opacity={0.9}>
-        <rect width="100%" height="100%" filter="url(#noiseFilter)" />
-      </g>
-    </svg>
-  );
+  const noise = useMemo(() => {
+    const svgWidth = Math.ceil((width ?? 1920) * ratio);
+    const svgHeight = Math.ceil((height ?? 1080) * ratio);
+    return (
+      <svg
+        viewBox={`0 0 ${svgWidth} ${svgHeight}`}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <filter id="noiseFilter">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="2.1"
+            numOctaves="2"
+            seed={chance.natural()}
+            stitchTiles="stitch"
+          />
+        </filter>
+        <g opacity={0.9}>
+          <rect width="100%" height="100%" filter="url(#noiseFilter)" />
+        </g>
+      </svg>
+    );
+  }, [width, height, ratio]);
 
   return {
     regenerate,
