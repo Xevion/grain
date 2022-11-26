@@ -30,8 +30,11 @@ function App() {
   };
 
   return (
-    <div style={style} className="text-zinc-800 gradient">
-      <div className="font-inter min-w-[100vw] min-h-[100vh] bg-zinc-800/50 bg-blend-overlay">
+    <div
+      style={style}
+      className="text-zinc-800 gradient max-w-[100vw] max-h-[100vh] overflow-clip"
+    >
+      <div className="font-inter w-full h-full bg-zinc-800/50 bg-blend-overlay">
         <div className="grid grid-cols-12 w-full">
           <div className="col-span-3 sm:col-span-2">
             <button
@@ -55,11 +58,11 @@ function App() {
             </button>
           </div>
           <div
-            className={`transition-opacity ease-in-out duration-75 ${
+            className={`h-[100vh] transition-opacity ease-in-out duration-75 ${
               postHidden ? "opacity-0" : ""
             } flex col-span-9 sm:col-span-6 md:col-span-5 w-full min-h-[100vh]`}
           >
-            <div className="bg-white shadow-lg">
+            <div className="bg-white overflow-y-auto">
               <Post />
             </div>
           </div>
