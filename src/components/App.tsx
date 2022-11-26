@@ -7,6 +7,7 @@ import {
   EyeIcon,
   EyeSlashIcon,
 } from "@heroicons/react/24/solid";
+import { useMemo } from "react";
 
 function App() {
   const { width, height } = useWindowSize();
@@ -25,9 +26,11 @@ function App() {
     iconSpinning ? 200 : null
   );
 
-  const style = {
-    background: [`url("${svg}")`, ...backgrounds].join(", "),
-  };
+  const style = useMemo(() => {
+    return {
+      background: [`url("${svg}")`, ...backgrounds].join(", "),
+    };
+  }, [svg, backgrounds]);
 
   return (
     <div
@@ -61,6 +64,7 @@ function App() {
             className={`h-[100vh] transition-opacity ease-in-out duration-75 ${
               postHidden ? "opacity-0" : ""
             } flex col-span-9 sm:col-span-6 md:col-span-5 w-full min-h-[100vh]`}
+            
           >
             <div className="bg-white overflow-y-auto">
               <Post />
