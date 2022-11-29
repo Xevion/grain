@@ -1,4 +1,4 @@
-# grain
+![Grain Project - Banner Image][grain-banner]
 
 A small experiment on creating beautiful, dynamic backgrounds with
 colorful gradients & film grain. Built in <b>React</b> & <b>Vite</b> with <b>SVGs</b> and layers of <b>Radial Gradients</b>
@@ -25,3 +25,5 @@ yarn  # Run inside root directory to install all dependencies.
 ```bash
 yarn dev  # Starts a development server with Hot Module Replacement
 ```
+
+[grain-banner]: ./.media/banner.jpeg
