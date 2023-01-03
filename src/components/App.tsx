@@ -62,7 +62,7 @@ function App() {
           </div>
           <div
             className={`h-[100vh] transition-opacity ease-in-out duration-75 ${
-              postHidden ? "opacity-0" : ""
+              postHidden ? "opacity-0 pointer-events-none" : ""
             } flex col-span-9 sm:col-span-6 md:col-span-5 w-full min-h-[100vh]`}
             
           >
