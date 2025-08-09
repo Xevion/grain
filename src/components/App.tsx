@@ -1,4 +1,4 @@
-import { useInterval, useWindowSize, useToggle } from "usehooks-ts";
+import { useViewportSize, useToggle } from "@mantine/hooks";
 import useBackground from "@/utils/useBackground";
 import Post from "@/components/Post";
 
@@ -7,24 +7,18 @@ import {
   EyeIcon,
   EyeSlashIcon,
 } from "@heroicons/react/24/solid";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 function App() {
-  const { width, height } = useWindowSize();
+  const { width, height } = useViewportSize();
   const { svg, backgrounds, regenerate } = useBackground({
     width,
     height,
     ratio: 0.4,
   });
-  const [postHidden, toggleHidden] = useToggle(false);
+  const [postHidden, toggleHidden] = useToggle([false, true]);
 
-  const [iconSpinning, , setIconSpinning] = useToggle(false);
-  useInterval(
-    () => {
-      setIconSpinning(false);
-    },
-    iconSpinning ? 200 : null
-  );
+  const [iconSpinning, toggleIconSpinning] = useToggle([false, true]);
 
   const style = useMemo(() => {
     return {
@@ -43,8 +37,9 @@ function App() {
             <button
               className="block p-2 w-10 h-10 rounded mx-auto xs:mx-0 xs:ml-5 mt-5 shadow-inner-md bg-zinc-700 text-zinc-100 button"
               onClick={() => {
-                setIconSpinning(true);
+                toggleIconSpinning(true);
                 regenerate();
+                setTimeout(() => toggleIconSpinning(false), 200);
               }}
             >
               <ArrowPathIcon
@@ -55,7 +50,7 @@ function App() {
             </button>
             <button
               className="block p-2 w-10 h-10 rounded mx-auto xs:mx-0 xs:ml-5 mt-5 shadow-inner-md bg-zinc-700 text-zinc-100 button"
-              onClick={toggleHidden}
+              onClick={() => toggleHidden()}
             >
               {postHidden ? <EyeIcon /> : <EyeSlashIcon />}
             </button>

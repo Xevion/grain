@@ -10,20 +10,21 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
+    "@mantine/hooks": "^8.2.4",
     "@tailwindcss/vite": "^4.1.11",
     "@use-it/event-listener": "^0.1.7",
-    "chance": "^1.1.13",
+    "cssnano": "^7.1.0",
+    "random-js": "^2.1.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "tailwindcss": "^4.1.11",
-    "usehooks-ts": "^3.1.1"
+    "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
-    "@types/chance": "^1.1.7",
     "@types/node": "^24.2.1",
     "@types/react": "^19.1.9",
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react": "^5.0.0",
+    "rollup-plugin-visualizer": "^6.0.3",
     "typescript": "^5.9.2",
     "vite": "^7.1.1",
     "vite-tsconfig-paths": "^5.1.4"

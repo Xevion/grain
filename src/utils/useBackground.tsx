@@ -1,4 +1,4 @@
-import { Chance } from "chance";
+import { Random } from "random-js";
 import { useMemo, useState } from "react";
 import ReactDOMServer from "react-dom/server";
 import { getEdgePoint } from "@/utils/helpers";
@@ -15,20 +15,20 @@ interface useBackgroundReturn {
   svg: string;
 }
 
-const chance = Chance();
+const random = new Random();
 const palettes = [
   //   ["#5e1e1e", "#141414", "#400000", "#7a0000", "#2b0059", "#000c59", "#850082", "#850052"],
   ["#ed625d", "#42b6c6", "#f79f88", "#446ba6", "#4b95f0", "#d16ba5"],
 ];
 
 const generateBackground = (): string[] => {
-  const palette = chance.pick(palettes);
+  const palette = random.pick(palettes);
   return Array(5)
     .fill(null)
-    .map(() => chance.pickone(palette))
+    .map(() => random.pick(palette))
     .map((color) => {
       const [x, y] = getEdgePoint(
-        chance.integer({ min: 0, max: 400 }),
+        random.integer(0, 400),
         100,
         100
       );
@@ -60,7 +60,7 @@ const useBackground = ({
             type="fractalNoise"
             baseFrequency="2.1"
             numOctaves="2"
-            seed={chance.natural()}
+            seed={random.integer(0, 1000000)}
             stitchTiles="stitch"
           />
         </filter>
