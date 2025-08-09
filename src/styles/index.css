@@ -3,6 +3,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
 @import "tailwindcss";
 
+@theme {
+  --font-family-opensans: "Open Sans", sans-serif;
+  --font-family-inter: "Inter", sans-serif;
+  --font-family-mono: "Roboto Mono", monospace;
+  --font-family-raleway: "Raleway", sans-serif;
+  --font-family-roboto: "Roboto";
+
+  --box-shadow-inner-md: inset 1px 4px 6px 0 rgb(0 0 0 / 0.1);
+  --box-shadow-inner-md-2: inset 2px 2px 6px 0 rgb(0 0 0 / 0.15);
+  --box-shadow-inner-md-3: inset 2px 4px 6px 0 rgb(0 0 0 / 0.21);
+  --box-shadow-inner-md-4: inset 2px 4px 10px 0 rgb(0 0 0 / 0.28);
+  --box-shadow-inner-lg: inset 4px 5px 7px 0 rgb(0 0 0 / 0.2);
+  --box-shadow-inner-xl: inset 4px 9px 9px 0 rgb(0 0 0 / 0.3);
+  --box-shadow-inner-2xl: inset 4px 11px 12px 0 rgb(0 0 0 / 0.3);
+
+  --screens-xs: 450px;
+}
+
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
