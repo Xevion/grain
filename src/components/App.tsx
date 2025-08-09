@@ -35,7 +35,7 @@ function App() {
   return (
     <div
       style={style}
-      className="text-zinc-800 gradient max-w-[100vw] max-h-[100vh] overflow-clip"
+      className="text-zinc-800 gradient max-w-screen max-h-screen overflow-clip"
     >
       <div className="font-inter w-full h-full bg-zinc-800/50 bg-blend-overlay">
         <div className="grid grid-cols-12 w-full">
@@ -61,9 +61,9 @@ function App() {
             </button>
           </div>
           <div
-            className={`h-[100vh] transition-opacity ease-in-out duration-75 ${
+            className={`h-screen transition-opacity ease-in-out duration-75 ${
               postHidden ? "opacity-0 pointer-events-none" : ""
-            } flex col-span-9 sm:col-span-6 md:col-span-5 w-full min-h-[100vh]`}
+            } flex col-span-9 sm:col-span-6 md:col-span-5 w-full min-h-screen`}
             
           >
             <div className="bg-white overflow-y-auto">

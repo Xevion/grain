@@ -62,7 +62,7 @@ const Post = () => {
           </p>
           <div className="pt-3">
             <a href="https://github.com/Xevion/grain">
-              <div className="inline text-white text-medium drop-shadow-lg rounded border-2 shadow-xl border-zinc-600/75 m-2 p-2 bg-gradient-to-r from-red-500 via-orange-500 to-orange-700">
+              <div className="inline text-white text-medium drop-shadow-lg rounded border-2 shadow-xl border-zinc-600/75 m-2 p-2 bg-linear-to-r from-red-500 via-orange-500 to-orange-700">
                 In Progress
                 <ShieldExclamationIcon className="inline h-[1.4rem] ml-3 drop-shadow-2xl" />
               </div>
