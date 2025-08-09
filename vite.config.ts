@@ -10,5 +10,8 @@ export default ({ mode }) => {
   return defineConfig({
     base: "/",
     plugins: [react(), tsconfigPaths(), tailwindcss()],
+    build: {
+      chunkSizeWarningLimit: 650,
+    },
   });
 };
