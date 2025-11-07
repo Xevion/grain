@@ -1,5 +1,4 @@
-import { SparklesIcon } from "@heroicons/react/20/solid";
-import { ShieldExclamationIcon } from "@heroicons/react/24/solid";
+import { Sparkles, ShieldAlert } from "lucide-preact";
 
 const Post = () => {
   return (
@@ -23,7 +22,7 @@ const Post = () => {
               target="_blank"
               className="hover:text-yellow-600 transition-colors cursor-pointer"
             >
-              <SparklesIcon className="h-4 inline mb-2.5 m-2 " />
+              <Sparkles className="h-4 inline mb-2.5 m-2 " />
             </a>
           </span>
         </div>
@@ -47,24 +46,24 @@ const Post = () => {
           </p>
           <p>
             By using a SVG with a{" "}
-            <pre className="inline">&lt;feTurbulence&gt;</pre> filter inside,
-            stacked upon several <pre className="inline">radial-gradient</pre>{" "}
+            <code>&lt;feTurbulence&gt;</code> filter inside,
+            stacked upon several <code>radial-gradient</code>{" "}
             background images, the same effect can be created. Since SVGs do not
             naturally repeat internally, the SVG itself must be generated in
             such a way that the noise always displays the same way.
           </p>
           <p>
             React comes in handy here, allowing composition of an SVG, and then
-            conversion to a <pre className="inline">base64</pre> encoded string.
-            As a <pre className="inline">base64</pre> image, it can be fed into
-            the <pre className="inline">background</pre> CSS property, allowing
+            conversion to a <code>base64</code> encoded string.
+            As a <code>base64</code> image, it can be fed into
+            the <code>background</code> CSS property, allowing
             dynamic SVG generation.
           </p>
           <div className="pt-3">
             <a href="https://github.com/Xevion/grain">
               <div className="inline text-white text-medium drop-shadow-lg rounded border-2 shadow-xl border-zinc-600/75 m-2 p-2 bg-linear-to-r from-red-500 via-orange-500 to-orange-700">
                 In Progress
-                <ShieldExclamationIcon className="inline h-[1.4rem] ml-3 drop-shadow-2xl" />
+                <ShieldAlert className="inline h-[1.4rem] ml-3 drop-shadow-2xl" />
               </div>
             </a>
           </div>

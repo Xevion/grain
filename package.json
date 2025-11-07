@@ -1,33 +1,42 @@
 {
-  "name": "noise",
   "private": true,
-  "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@heroicons/react": "^2.2.0",
-    "@mantine/hooks": "^8.2.4",
-    "@tailwindcss/vite": "^4.1.11",
-    "@use-it/event-listener": "^0.1.7",
+    "@tailwindcss/vite": "^4.1.17",
     "cssnano": "^7.1.0",
+    "lucide-preact": "^0.468.0",
+    "preact": "^10.27.2",
+    "preact-iso": "^2.11.0",
+    "preact-render-to-string": "^6.6.3",
     "random-js": "^2.1.0",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "tailwindcss": "^4.1.11"
+    "tailwindcss": "^4.1.17"
   },
   "devDependencies": {
-    "@types/node": "^24.2.1",
-    "@types/react": "^19.1.9",
-    "@types/react-dom": "^19.1.7",
-    "@vitejs/plugin-react": "^5.0.0",
-    "rollup-plugin-visualizer": "^6.0.3",
-    "typescript": "^5.9.2",
-    "vite": "^7.1.1",
-    "vite-tsconfig-paths": "^5.1.4"
+    "@preact/preset-vite": "^2.10.2",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/preact": "^3.2.4",
+    "@types/node": "^24.10.0",
+    "@vitest/ui": "4.0.7",
+    "eslint": "^9.39.1",
+    "eslint-config-preact": "^2.0.0",
+    "happy-dom": "^20.0.10",
+    "rollup-plugin-visualizer": "^6.0.5",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.1",
+    "vitest": "^4.0.7"
+  },
+  "eslintConfig": {
+    "extends": "preact"
   },
   "packageManager": "pnpm@9.15.1+sha512.1acb565e6193efbebda772702950469150cf12bcc764262e7587e71d19dc98a423dff9536e57ea44c49bdf790ff694e83c27be5faa23d67e0c033b583be4bfcf"
 }

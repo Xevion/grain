@@ -1,25 +1,25 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "allowJs": false,
-    "skipLibCheck": true,
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
+    "target": "ES2020",
     "module": "ESNext",
-    "moduleResolution": "Node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
+    "moduleResolution": "bundler",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "noEmit": true,
+    "allowJs": true,
+    "checkJs": true,
+
+    /* Preact Config */
     "jsx": "react-jsx",
-    "baseUrl": "./src/",
+    "jsxImportSource": "preact",
+    "skipLibCheck": true,
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["./*"]
-    }
+      "react": ["node_modules/preact/compat/"],
+      "react-dom": ["node_modules/preact/compat/"],
+      "@/*": ["src/*"]
+    },
+
+    "outDir": "./dist"
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["node_modules/vite/client.d.ts", "src"]
 }

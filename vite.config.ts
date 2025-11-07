@@ -1,6 +1,5 @@
 import { defineConfig, loadEnv } from "vite";
-import react from "@vitejs/plugin-react";
-import tsconfigPaths from "vite-tsconfig-paths";
+import preact from "@preact/preset-vite";
 import tailwindcss from "@tailwindcss/vite";
 import { visualizer } from "rollup-plugin-visualizer";
 import cssnano from "cssnano";
@@ -12,11 +11,13 @@ export default ({ mode }) => {
   return defineConfig({
     base: "/",
     plugins: [
-      react(),
-      tsconfigPaths(),
+      preact({
+        prerender: {
+          enabled: true,
+          renderTarget: "#root",
+        },
+      }),
       tailwindcss(),
-      cssnano(),
-
       visualizer({
         template: "treemap",
         open: true, // Automatically open the report in your browser after build
@@ -25,17 +26,5 @@ export default ({ mode }) => {
         brotliSize: true, // Show brotli size
       }),
     ],
-    build: {
-      rollupOptions: {
-        treeshake: {
-          // Remove unused module exports
-          moduleSideEffects: false,
-          // Optimize property access
-          propertyReadSideEffects: false,
-          // Remove unused imports
-          tryCatchDeoptimization: false,
-        },
-      },
-    },
   });
 };
