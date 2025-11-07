@@ -1,14 +1,16 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
+@import "@fontsource/space-grotesk/400.css";
+@import "@fontsource/space-grotesk/600.css";
+@import "@fontsource/space-grotesk/700.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/roboto-mono/400.css";
 @import "tailwindcss";
 
 @theme {
-  --font-family-opensans: "Open Sans", sans-serif;
+  --font-family-space-grotesk: "Space Grotesk", sans-serif;
   --font-family-inter: "Inter", sans-serif;
   --font-family-mono: "Roboto Mono", monospace;
-  --font-family-raleway: "Raleway", sans-serif;
-  --font-family-roboto: "Roboto";
 
   --box-shadow-inner-md: inset 1px 4px 6px 0 rgb(0 0 0 / 0.1);
   --box-shadow-inner-md-2: inset 2px 2px 6px 0 rgb(0 0 0 / 0.15);
@@ -59,4 +61,48 @@ body {
 
 pre.inline {
   @apply text-zinc-900;
+}
+
+/* Glassmorphism utilities */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(50px) saturate(100%);
+  /* -webkit-backdrop-filter: blur(10px) saturate(80%); */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.glass-button {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px) saturate(60%);
+  -webkit-backdrop-filter: blur(10px) saturate(60%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+}
+
+.glass-button:hover {
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px);
+}
+
+.glass-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(8px) saturate(60%);
+  -webkit-backdrop-filter: blur(8px) saturate(60%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(15px) saturate(50%);
+  -webkit-backdrop-filter: blur(15px) saturate(50%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
 }

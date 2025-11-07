@@ -31,14 +31,14 @@ describe("App", () => {
     expect(() => render(h(App, {}))).not.toThrow();
   });
 
-  it("renders the Post component with main heading", () => {
+  it("renders the main heading", () => {
     const { getAllByText } = render(h(App, {}));
     expect(getAllByText("Grain").length).toBeGreaterThan(0);
   });
 
-  it("renders author information", () => {
+  it("renders the tagline", () => {
     const { getAllByText } = render(h(App, {}));
-    expect(getAllByText("Ryan Walters").length).toBeGreaterThan(0);
+    expect(getAllByText("Neural Gradient Explorer").length).toBeGreaterThan(0);
   });
 
   it("renders with gradient class", () => {

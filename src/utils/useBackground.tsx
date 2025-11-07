@@ -1,10 +1,14 @@
 import { Random } from "random-js";
-import { useMemo, useState } from "preact/hooks";
+import { useMemo, useState, useEffect } from "preact/hooks";
 import { getEdgePoint } from "./helpers";
+
 interface useBackgroundProps {
   width: number;
   height: number;
   ratio: number;
+  paletteColors: string[];
+  gradientCount?: number;
+  noiseIntensity?: number;
 }
 
 interface useBackgroundReturn {
@@ -14,16 +18,11 @@ interface useBackgroundReturn {
 }
 
 const random = new Random();
-const palettes = [
-  //   ["#5e1e1e", "#141414", "#400000", "#7a0000", "#2b0059", "#000c59", "#850082", "#850052"],
-  ["#ed625d", "#42b6c6", "#f79f88", "#446ba6", "#4b95f0", "#d16ba5"],
-];
 
-const generateBackground = (): string[] => {
-  const palette = random.pick(palettes);
-  return Array(5)
+const generateBackground = (paletteColors: string[], count: number): string[] => {
+  return Array(count)
     .fill(null)
-    .map(() => random.pick(palette))
+    .map(() => random.pick(paletteColors))
     .map((color) => {
       const [x, y] = getEdgePoint(random.integer(0, 400), 100, 100);
       return `radial-gradient(farthest-corner at ${x}% ${y}%, ${color}, transparent 100%)`;
@@ -34,11 +33,19 @@ const useBackground = ({
   width,
   height,
   ratio,
+  paletteColors,
+  gradientCount = 5,
+  noiseIntensity = 0.9,
 }: useBackgroundProps): useBackgroundReturn => {
-  const [background, setBackground] = useState(generateBackground());
+  const [background, setBackground] = useState(() => generateBackground(paletteColors, gradientCount));
+
+  // Regenerate when palette or count changes
+  useEffect(() => {
+    setBackground(generateBackground(paletteColors, gradientCount));
+  }, [paletteColors, gradientCount]);
 
   const regenerate = () => {
-    setBackground(generateBackground());
+    setBackground(generateBackground(paletteColors, gradientCount));
   };
 
   const noise = (): string => {
@@ -46,7 +53,7 @@ const useBackground = ({
     const svgHeight = Math.ceil((height ?? 1080) * ratio);
     const seed = random.integer(0, 1000000);
 
-    return `<svg viewBox="0 0 ${svgWidth} ${svgHeight}" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="2.1" numOctaves="2" seed="${seed}" stitchTiles="stitch"/></filter><g opacity="0.9"><rect width="100%" height="100%" filter="url(#noiseFilter)"/></g></svg>`;
+    return `<svg viewBox="0 0 ${svgWidth} ${svgHeight}" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="2.1" numOctaves="2" seed="${seed}" stitchTiles="stitch"/></filter><g opacity="${noiseIntensity}"><rect width="100%" height="100%" filter="url(#noiseFilter)"/></g></svg>`;
   };
 
   return {

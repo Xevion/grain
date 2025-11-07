@@ -1,71 +1,98 @@
 import { hydrate, prerender as ssr } from "preact-iso";
+import { useMemo, useState, useEffect } from "preact/hooks";
 
 import "./index.css";
 
 import { useViewportSize } from "./utils/useViewportSize";
-import { useBooleanToggle } from "./utils/useBooleanToggle";
 import useBackground from "./utils/useBackground";
-import Post from "./components/Post";
-import { RefreshCw, Eye, EyeOff } from "lucide-preact";
-import { useMemo } from "preact/hooks";
+import { GlassPanel } from "./components/GlassPanel";
+import { GradientControls } from "./components/GradientControls";
+import { ExportModal } from "./components/ExportModal";
+import { getPaletteById } from "./utils/palettes";
+import type { ExportData } from "./utils/exportGradient";
 
 export function App() {
   const { width, height } = useViewportSize();
+
+  // Gradient state
+  const [paletteId, setPaletteId] = useState("classic");
+  const [gradientCount, setGradientCount] = useState(5);
+  const [noiseIntensity, setNoiseIntensity] = useState(0.9);
+  const [exportModalOpen, setExportModalOpen] = useState(false);
+
+  const palette = getPaletteById(paletteId);
+
   const { svg, backgrounds, regenerate } = useBackground({
     width,
     height,
     ratio: 0.4,
+    paletteColors: palette.colors,
+    gradientCount,
+    noiseIntensity,
   });
-  const [postHidden, toggleHidden] = useBooleanToggle(false);
-  const [iconSpinning, toggleIconSpinning] = useBooleanToggle(false);
 
-  const style = useMemo(() => {
+  const gradientStyle = useMemo(() => {
     return {
       background: [`url("${svg}")`, ...backgrounds].join(", "),
     };
   }, [svg, backgrounds]);
 
+  const exportData: ExportData = useMemo(() => ({
+    backgrounds,
+    svg,
+    noiseIntensity,
+  }), [backgrounds, svg, noiseIntensity]);
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === "r" || e.key === "R") {
+        e.preventDefault();
+        regenerate();
+      } else if (e.key === "e" || e.key === "E") {
+        e.preventDefault();
+        setExportModalOpen(true);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
+  }, [regenerate]);
+
   return (
-    <div
-      style={style}
-      className="text-zinc-800 gradient max-w-screen max-h-screen overflow-clip"
-    >
-      <div className="font-inter w-full h-full bg-zinc-800/50 bg-blend-overlay">
-        <div className="grid grid-cols-12 w-full">
-          <div className="col-span-3 sm:col-span-2">
-            <button
-              className="block p-2 w-10 h-10 rounded mx-auto xs:mx-0 xs:ml-5 mt-5 shadow-inner-md bg-zinc-700 text-zinc-100 button"
-              onClick={() => {
-                toggleIconSpinning(true);
-                regenerate();
-                setTimeout(() => toggleIconSpinning(false), 200);
-              }}
-            >
-              <RefreshCw
-                className={`transition-transform duration-200 ${
-                  iconSpinning ? "rotate-180" : "rotate-0"
-                }`}
-              />
-            </button>
-            <button
-              className="block p-2 w-10 h-10 rounded mx-auto xs:mx-0 xs:ml-5 mt-5 shadow-inner-md bg-zinc-700 text-zinc-100 button"
-              onClick={() => toggleHidden()}
-            >
-              {postHidden ? <Eye /> : <EyeOff />}
-            </button>
-          </div>
-          <div
-            className={`h-screen transition-opacity ease-in-out duration-75 ${
-              postHidden ? "opacity-0 pointer-events-none" : ""
-            } flex col-span-9 sm:col-span-6 md:col-span-5 w-full min-h-screen`}
-          >
-            <div className="bg-white overflow-y-auto">
-              <Post />
-            </div>
-          </div>
-        </div>
+    <>
+      {/* Full-screen gradient background */}
+      <div
+        id="gradient-container"
+        style={gradientStyle}
+        className="w-full h-screen gradient text-zinc-800 overflow-clip"
+      >
+        <div className="w-full h-full bg-zinc-800/50 bg-blend-overlay" />
       </div>
-    </div>
+
+      {/* Fixed overlay panel on left */}
+      <div className="absolute top-0 left-0 w-[400px] h-screen pointer-events-none">
+        <GlassPanel className="m-6 h-[calc(100vh-3rem)] pointer-events-auto">
+          <GradientControls
+            paletteId={paletteId}
+            onPaletteChange={setPaletteId}
+            gradientCount={gradientCount}
+            onGradientCountChange={setGradientCount}
+            noiseIntensity={noiseIntensity}
+            onNoiseIntensityChange={setNoiseIntensity}
+            onRegenerate={regenerate}
+            onExport={() => setExportModalOpen(true)}
+          />
+        </GlassPanel>
+      </div>
+
+      {/* Export modal */}
+      <ExportModal
+        open={exportModalOpen}
+        onClose={() => setExportModalOpen(false)}
+        exportData={exportData}
+      />
+    </>
   );
 }
 
