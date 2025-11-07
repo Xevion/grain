@@ -8,6 +8,7 @@ interface SliderControlProps {
   max: number;
   step?: number;
   formatValue?: (value: number) => string;
+  className?: string;
 }
 
 export function SliderControl({
@@ -17,15 +18,16 @@ export function SliderControl({
   min,
   max,
   step = 1,
-  formatValue = (v) => v.toString()
+  formatValue = (v) => v.toString(),
+  className,
 }: SliderControlProps) {
   return (
-    <div className="space-y-2">
+    <div className={`space-y ${className}`}>
       <div className="flex justify-between items-center">
-        <label className="font-space-grotesk text-sm font-semibold uppercase tracking-wide text-zinc-900">
+        <label className="font-space-grotesk text-sm font-semibold uppercase tracking-wide text-zinc-50 text-shadow-md">
           {label}
         </label>
-        <span className="font-inter text-sm text-zinc-800">
+        <span className="font-inter text-sm text-zinc-100 text-shadow-md">
           {formatValue(value)}
         </span>
       </div>
@@ -37,7 +39,7 @@ export function SliderControl({
         max={max}
         step={step}
       >
-        <Slider.Track className="glass-input relative flex-grow rounded-full h-3">
+        <Slider.Track className="glass-input relative grow rounded-full h-3">
           <Slider.Range className="absolute bg-white/40 rounded-full h-full" />
         </Slider.Track>
         <Slider.Thumb

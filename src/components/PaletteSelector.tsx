@@ -4,12 +4,17 @@ import { motion } from "framer-motion";
 interface PaletteSelectorProps {
   selectedPaletteId: string;
   onSelect: (paletteId: string) => void;
+  className?: string;
 }
 
-export function PaletteSelector({ selectedPaletteId, onSelect }: PaletteSelectorProps) {
+export function PaletteSelector({
+  selectedPaletteId,
+  onSelect,
+  className,
+}: PaletteSelectorProps) {
   return (
-    <div className="space-y-2">
-      <label className="font-space-grotesk text-sm font-semibold uppercase tracking-wide text-zinc-900">
+    <div className={`space-y-2 ${className}`}>
+      <label className="font-space-grotesk text-sm font-semibold uppercase tracking-wide text-zinc-50 text-shadow-md">
         Color Palette
       </label>
       <div className="grid grid-cols-2 gap-2">

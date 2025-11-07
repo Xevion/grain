@@ -7,9 +7,8 @@ import { useViewportSize } from "./utils/useViewportSize";
 import useBackground from "./utils/useBackground";
 import { GlassPanel } from "./components/GlassPanel";
 import { GradientControls } from "./components/GradientControls";
-import { ExportModal } from "./components/ExportModal";
 import { getPaletteById } from "./utils/palettes";
-import type { ExportData } from "./utils/exportGradient";
+import { exportGradientAsPNG } from "./utils/exportGradient";
 
 export function App() {
   const { width, height } = useViewportSize();
@@ -18,7 +17,6 @@ export function App() {
   const [paletteId, setPaletteId] = useState("classic");
   const [gradientCount, setGradientCount] = useState(5);
   const [noiseIntensity, setNoiseIntensity] = useState(0.9);
-  const [exportModalOpen, setExportModalOpen] = useState(false);
 
   const palette = getPaletteById(paletteId);
 
@@ -37,12 +35,6 @@ export function App() {
     };
   }, [svg, backgrounds]);
 
-  const exportData: ExportData = useMemo(() => ({
-    backgrounds,
-    svg,
-    noiseIntensity,
-  }), [backgrounds, svg, noiseIntensity]);
-
   // Keyboard shortcuts
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
@@ -51,7 +43,7 @@ export function App() {
         regenerate();
       } else if (e.key === "e" || e.key === "E") {
         e.preventDefault();
-        setExportModalOpen(true);
+        exportGradientAsPNG();
       }
     };
 
@@ -81,17 +73,10 @@ export function App() {
             noiseIntensity={noiseIntensity}
             onNoiseIntensityChange={setNoiseIntensity}
             onRegenerate={regenerate}
-            onExport={() => setExportModalOpen(true)}
+            onExport={() => exportGradientAsPNG()}
           />
         </GlassPanel>
       </div>
-
-      {/* Export modal */}
-      <ExportModal
-        open={exportModalOpen}
-        onClose={() => setExportModalOpen(false)}
-        exportData={exportData}
-      />
     </>
   );
 }

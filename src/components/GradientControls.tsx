@@ -28,69 +28,70 @@ export function GradientControls({
   return (
     <div className="flex flex-col h-full">
       {/* Header */}
-      <div className="p-6">
-        <h1 className="font-space-grotesk text-4xl font-bold tracking-tight text-zinc-900">
+      <div className="pl-4 pt-3 pb-2">
+        <h1 className="font-space-grotesk text-4xl font-bold tracking-tight text-zinc-50 text-shadow-md">
           Grain
         </h1>
       </div>
 
-      <Separator.Root className="h-px bg-white/20 mx-6" />
+      <Separator.Root className="h-px bg-white/20" />
 
       {/* Controls */}
-      <div className="flex-1 overflow-y-auto p-6 space-y-6">
-        {/* Palette Selector */}
-        <PaletteSelector
-          selectedPaletteId={paletteId}
-          onSelect={onPaletteChange}
-        />
+      {/* Palette Selector */}
+      <PaletteSelector
+        className="px-6 py-4"
+        selectedPaletteId={paletteId}
+        onSelect={onPaletteChange}
+      />
 
-        <Separator.Root className="h-px bg-white/10" />
+      <Separator.Root className="h-px bg-white/20" />
 
-        {/* Gradient Count Slider */}
-        <SliderControl
-          label="Gradients"
-          value={gradientCount}
-          onChange={onGradientCountChange}
-          min={2}
-          max={8}
-          step={1}
-        />
+      {/* Gradient Count Slider */}
+      <SliderControl
+        label="Gradients"
+        value={gradientCount}
+        onChange={onGradientCountChange}
+        min={2}
+        max={8}
+        step={1}
+        className="px-6 py-4"
+      />
 
-        {/* Noise Intensity Slider */}
-        <SliderControl
-          label="Noise"
-          value={noiseIntensity}
-          onChange={onNoiseIntensityChange}
-          min={0}
-          max={1.5}
-          step={0.1}
-          formatValue={(v) => `${Math.round(v * 100)}%`}
-        />
+      {/* Noise Intensity Slider */}
+      <SliderControl
+        label="Noise"
+        value={noiseIntensity}
+        onChange={onNoiseIntensityChange}
+        min={0}
+        max={1.5}
+        step={0.1}
+        formatValue={(v) => `${Math.round(v * 100)}%`}
+        className="px-6 py-4"
+      />
 
-        <Separator.Root className="h-px bg-white/10" />
+      <Separator.Root className="h-px bg-white/20" />
 
-        {/* Action Buttons */}
-        <div className="space-y-3">
-          <GlassButton
-            onClick={onRegenerate}
-            className="w-full flex items-center justify-center gap-2"
-            tooltip="Regenerate gradient (R)"
-            aria-label="Regenerate gradient"
-          >
-            <RefreshCw size={18} />
-            <span>Regenerate</span>
-          </GlassButton>
+      {/* Action Buttons */}
+      <div className="flex flex-col gap-2 mx-6 my-4">
+        <GlassButton
+          onClick={onRegenerate}
+          className="w-full flex items-center justify-center gap-2"
+          tooltip="Regenerate gradient (R)"
+          aria-label="Regenerate gradient"
+        >
+          <RefreshCw size={18} />
+          <span>Regenerate</span>
+        </GlassButton>
 
-          <GlassButton
-            onClick={onExport}
-            className="w-full flex items-center justify-center gap-2"
-            tooltip="Export gradient (E)"
-            aria-label="Export gradient"
-          >
-            <Download size={18} />
-            <span>Export</span>
-          </GlassButton>
-        </div>
+        <GlassButton
+          onClick={onExport}
+          className="w-full flex items-center justify-center gap-2"
+          tooltip="Export gradient (E)"
+          aria-label="Export gradient"
+        >
+          <Download size={18} />
+          <span>Export</span>
+        </GlassButton>
       </div>
     </div>
   );

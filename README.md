@@ -1,29 +1,32 @@
-![Grain Project - Banner Image][grain-banner]
+[![Grain Project - Banner Image][grain-banner]][grain-website]
 
-A small experiment on creating beautiful, dynamic backgrounds with
-colorful gradients & film grain. Built in <b>React</b> & <b>Vite</b> with <b>SVGs</b> and layers of <b>Radial Gradients</b>
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
+[![Node Version](https://img.shields.io/badge/node-v22-brightgreen.svg)](https://nodejs.org/)
+[![pnpm](https://img.shields.io/badge/maintained%20with-pnpm-cc00ff.svg)](https://pnpm.io/)
 
-### Dependencies Used
+Create beautiful, dynamic backgrounds with colorful gradients and film grain. Built with modern web technologies for smooth performance and stunning visuals.
 
-- Hero Icons
-- React
-- Typescript
-- Vite
-- Sass
+- **Customizable gradients & noise** via SVG filters
+- **Preset palettes** for quick styling
+- **PNG export** with a single click
 
-### Installation
+Built with [Preact](https://preactjs.com/), [Vite](https://vite.dev/), [Tailwind CSS](https://tailwindcss.com/), [Radix UI](https://www.radix-ui.com/), and [Lucide Icons](https://lucide.dev/).
 
-- Built on Node v16, packages managed with Yarn.
-
-```bash
-npm install --global yarn  # If you don't have yarn installed
-yarn  # Run inside root directory to install all dependencies.
-```
-
-### Development
+## Usage
 
 ```bash
-yarn dev  # Starts a development server with Hot Module Replacement
+git clone https://github.com/Xevion/grain.git # Clone the repository
+cd grain # Navigate to the repository
+npm install --global pnpm # Install pnpm if needed
+pnpm install # Install dependencies
+pnpm dev # Start development server
+pnpm build # Build for production
+pnpm preview # Preview the production build
 ```
+
+## License
+
+Licensed under the [GNU General Public License v3.0](LICENSE).
 
 [grain-banner]: ./.media/banner.jpeg
+[grain-website]: https://grain.xevion.dev/
